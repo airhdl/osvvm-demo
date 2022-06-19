@@ -1,6 +1,6 @@
 # OSVVM Demonstrator
 
-A VHDL project demonstrating how to use the OSVVM Axi4LiteManager to control an [https://airhdl.com](airhdl) register bank.
+A VHDL project demonstrating how to use the [OSVVM library](https://osvvm.org/) to check the correct operation of an [airhdl](https://airhdl.com) register bank.
 
 ![Demonstrator architecture](./doc/osvvm-demo.png)
 
