@@ -6,7 +6,7 @@ A VHDL project demonstrating how to use the [OSVVM library](https://osvvm.org/) 
 
 ## Architecture
 
-The toplevel component instantiates an airhdl register bank called `regs_osvvm`, which containts two registers:
+The toplevel component instantiates an airhdl register bank, `osvvm_regs`, which contains two registers:
 
 * a read/write `Control` register with a 16-bit `value` field   
 * a read-only `Status` register with a 16-bit `value` field
