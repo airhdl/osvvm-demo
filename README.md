@@ -1,2 +1,18 @@
 # osvvm-demo
-A project demonstrating how to use the OSVVM Axi4LiteManager to control an airhdl register bank
+
+A VHDL project demonstrating how to use the OSVVM Axi4LiteManager to control an [https://airhdl.com](airhdl) register bank.
+
+## Architecture
+
+The toplevel component instantiates an airhdl register bank called `regs_osvvm`, which containts two registers:
+
+* a read/write `Control` register with a 16-bit `value` field   
+* a read-only `Status` register with a 16-bit `value` field
+
+The `Control.value` output port of the register bank, which reflects the current value of the `Control.value` field, 
+is looped back to the `Status.value` input port, which represents the value to be read from the `Status.value` field.
+
+![Demonstrator architecture](./doc/osvvm-demo.png)
+
+`Axi4LiteManager` component, which is part of the OSVVM library, acts as a AXI4-Lite master. It is controlled by the Test Controller 
+through a standard OSVVM transaction record signal. 

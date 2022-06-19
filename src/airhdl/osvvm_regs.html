@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>osvvm Register Map</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+        <style>
+            .dl-horizontal dt {
+                text-align: left;
+                margin-bottom: 1em;
+            }
+
+            .dl-horizontal dl {
+                margin-bottom: 1em;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="row">
+            <div class="col-md-offset-2 col-md-8">
+                <h2 class="page-header">osvvm
+                    <small>register map</small>
+                </h2>
+
+                <dl class="dl-horizontal">
+                    <dt><strong>Description</strong></dt><dd>OSVVM demonstrator register map</dd>
+                    <dt><strong>Default base address</strong></dt><dd style="font-family:monospace;">0xA0000000</dd>
+                    <dt><strong>Register width</strong></dt><dd>32 bits</dd>
+                    <dt><strong>Default address width</strong></dt><dd>32 bits</dd>
+                    <dt><strong>Register count</strong></dt><dd>2</dd>
+                    <dt>Range</dt>
+                    <dd>8 bytes
+                    </dd>
+                    <dt><strong>Revision</strong></dt><dd>5</dd>
+                </dl>
+<a id="OVERVIEW"></a>
+                <h3 class="page-header">Overview</h3>
+                <div class="panel panel-default">
+                    <table class="table table-hover">
+                        <colgroup>
+                            <col class="col-md-1">
+                            <col class="col-md-2">
+                            <col class="col-md-8">
+                            <col class="col-md-1">
+                        </colgroup>
+                        <tr class="active">
+                            <th style="padding-left: 2em;">Offset</th>
+                            <th>Name</th>
+                            <th>Description</th>
+                            <th>Type</th>
+                        </tr>
+                        <tr onclick="window.location='#REG@Control';">
+                            <td style="font-family: monospace; padding-left: 2em;">0x0</td>
+                            <td>Control</td>
+                            <td>Control register</td>
+                            <td style="font-family: monospace;">REG</td>
+                        </tr>
+                        <tr onclick="window.location='#REG@Status';">
+                            <td style="font-family: monospace; padding-left: 2em;">0x4</td>
+                            <td>Status</td>
+                            <td>Status register</td>
+                            <td style="font-family: monospace;">REG</td>
+                        </tr>
+                    </table>
+                </div>
+
+                <h3 class="page-header">Registers</h3>
+
+<a id="REG@Control"></a>
+<div class="panel panel-default">
+                <table class="table">
+                    <tr class="active">
+                        <td colspan="3"><span class="lead"><strong>Control&nbsp;</span></strong><br/>Control register</td>
+                        <td colspan="2" style="font-family:monospace;">
+                            Register
+                            <br/>Offset: 0x0
+                            <br/>Access: READ_WRITE
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="text-right" style="font-family:monospace; width:4em;">[15:0]</td>
+                        <td><strong>value</strong><br/>
+                        </td>
+                        <td>
+                            &nbsp;
+                        </td>
+                        <td class="text-left" style="width:20em;">Reset: <span style="font-family:monospace;">0x0</span>
+                        </td>
+                    </tr>
+                </table>
+</div>
+<a id="REG@Status"></a>
+<div class="panel panel-default">
+                <table class="table">
+                    <tr class="active">
+                        <td colspan="3"><span class="lead"><strong>Status&nbsp;</span></strong><br/>Status register</td>
+                        <td colspan="2" style="font-family:monospace;">
+                            Register
+                            <br/>Offset: 0x4
+                            <br/>Access: READ_ONLY
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="text-right" style="font-family:monospace; width:4em;">[15:0]</td>
+                        <td><strong>value</strong><br/>
+                        </td>
+                        <td>
+                            &nbsp;
+                        </td>
+                        <td class="text-left" style="width:20em;">Reset: <span style="font-family:monospace;">0x0</span>
+                        </td>
+                    </tr>
+                </table>
+</div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-offset-3 col-md-6">
+                <p class="text-center" style="padding-top:1em; color:#888;">Generated on 2022-06-19 at 09:02 (UTC) by airhdl version 2022.04.1-119</p>
+            </div>
+        </div>
+    </body>
+</html>
