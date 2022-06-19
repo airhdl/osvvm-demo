@@ -33,10 +33,9 @@ context OSVVM.OsvvmContext;
 library osvvm_axi4;
 context osvvm_axi4.Axi4LiteContext;
 
+use work.osvvm_regs_pkg.all;
+
 entity tb_regs_osvvm is
-    generic(
-        REGS_BASEADDR : std_logic_vector(31 downto 0)
-    );
 end entity tb_regs_osvvm;
 
 architecture TestHarness of tb_regs_osvvm is
@@ -45,9 +44,12 @@ architecture TestHarness of tb_regs_osvvm is
     -- Constants
     ------------------------------------------------------------------------------------------------
 
-    constant AXI_ADDR_WIDTH : natural := 32;
-    constant AXI_CLK_PERIOD : time    := 10 ns;
-    constant TPD            : time    := 1 ns;
+    constant REGS_BASEADDR  : std_logic_vector(31 downto 0) := std_logic_vector(OSVVM_DEFAULT_BASEADDR);
+    constant AXI_ADDR_WIDTH : natural                       := 32;
+    constant AXI_DATA_WIDTH : natural                       := 32;
+    constant AXI_STRB_WIDTH : integer                       := AXI_DATA_WIDTH / 8;
+    constant AXI_CLK_PERIOD : time                          := 10 ns;
+    constant TPD            : time                          := 1 ns;
 
     ------------------------------------------------------------------------------------------------
     -- Components
@@ -74,8 +76,17 @@ architecture TestHarness of tb_regs_osvvm is
     signal axi_aresetn   : std_logic;
     signal control_value : std_logic_vector(15 downto 0);
     signal status_value  : std_logic_vector(15 downto 0);
-    signal Axi4MemRec    : AddressBusRecType;
-    signal AxiBus        : Axi4LiteRecType;
+    signal Axi4LiteBus   : Axi4LiteRecType(
+        WriteAddress(Addr(AXI_ADDR_WIDTH - 1 downto 0)),
+        WriteData(Data(AXI_DATA_WIDTH - 1 downto 0), Strb(AXI_STRB_WIDTH - 1 downto 0)),
+        ReadAddress(Addr(AXI_ADDR_WIDTH - 1 downto 0)),
+        ReadData(Data(AXI_DATA_WIDTH - 1 downto 0))
+    );
+    signal Axi4MemRec    : AddressBusRecType(
+        Address(AXI_ADDR_WIDTH - 1 downto 0),
+        DataToModel(AXI_DATA_WIDTH - 1 downto 0),
+        DataFromModel(AXI_DATA_WIDTH - 1 downto 0)
+    );
 
 begin
 
@@ -119,10 +130,13 @@ begin
     ------------------------------------------------------------------------------------------------
 
     axi4lite_manager_inst : entity osvvm_axi4.Axi4LiteManager -- @suppress "Generic map uses default values. Missing optional actuals: MODEL_ID_NAME, tperiod_Clk, DEFAULT_DELAY, tpd_Clk_AWAddr, tpd_Clk_AWProt, tpd_Clk_AWValid, tpd_Clk_WValid, tpd_Clk_WData, tpd_Clk_WStrb, tpd_Clk_BReady, tpd_Clk_ARValid, tpd_Clk_ARProt, tpd_Clk_ARAddr, tpd_Clk_RReady"
+        generic map(
+            MODEL_ID_NAME => "Axi4LiteManager"
+        )
         port map(
             Clk      => axi_aclk,
             nReset   => axi_aresetn,
-            AxiBus   => AxiBus,
+            AxiBus   => Axi4LiteBus,
             TransRec => Axi4MemRec
         );
 
@@ -138,25 +152,25 @@ begin
         port map(
             axi_aclk       => axi_aclk,
             axi_aresetn    => axi_aresetn,
-            s_axi_awaddr   => AxiBus.WriteAddress.Addr,
-            s_axi_awprot   => AxiBus.WriteAddress.Prot,
-            s_axi_awvalid  => AxiBus.WriteAddress.Valid,
-            s_axi_awready  => AxiBus.WriteAddress.Ready,
-            s_axi_wdata    => AxiBus.WriteData.Data,
-            s_axi_wstrb    => AxiBus.WriteData.Strb,
-            s_axi_wvalid   => AxiBus.WriteData.Valid,
-            s_axi_wready   => AxiBus.WriteData.Ready,
-            s_axi_araddr   => AxiBus.ReadAddress.Addr,
-            s_axi_arprot   => AxiBus.ReadAddress.Prot,
-            s_axi_arvalid  => AxiBus.ReadAddress.Valid,
-            s_axi_arready  => AxiBus.ReadAddress.Ready,
-            s_axi_rdata    => AxiBus.ReadData.Data,
-            s_axi_rresp    => AxiBus.ReadData.Resp,
-            s_axi_rvalid   => AxiBus.ReadData.Valid,
-            s_axi_rready   => AxiBus.ReadData.Ready,
-            s_axi_bresp    => AxiBus.WriteResponse.Resp,
-            s_axi_bvalid   => AxiBus.WriteResponse.Valid,
-            s_axi_bready   => AxiBus.WriteResponse.Ready,
+            s_axi_awaddr   => Axi4LiteBus.WriteAddress.Addr,
+            s_axi_awprot   => Axi4LiteBus.WriteAddress.Prot,
+            s_axi_awvalid  => Axi4LiteBus.WriteAddress.Valid,
+            s_axi_awready  => Axi4LiteBus.WriteAddress.Ready,
+            s_axi_wdata    => Axi4LiteBus.WriteData.Data,
+            s_axi_wstrb    => Axi4LiteBus.WriteData.Strb,
+            s_axi_wvalid   => Axi4LiteBus.WriteData.Valid,
+            s_axi_wready   => Axi4LiteBus.WriteData.Ready,
+            s_axi_araddr   => Axi4LiteBus.ReadAddress.Addr,
+            s_axi_arprot   => Axi4LiteBus.ReadAddress.Prot,
+            s_axi_arvalid  => Axi4LiteBus.ReadAddress.Valid,
+            s_axi_arready  => Axi4LiteBus.ReadAddress.Ready,
+            s_axi_rdata    => Axi4LiteBus.ReadData.Data,
+            s_axi_rresp    => Axi4LiteBus.ReadData.Resp,
+            s_axi_rvalid   => Axi4LiteBus.ReadData.Valid,
+            s_axi_rready   => Axi4LiteBus.ReadData.Ready,
+            s_axi_bresp    => Axi4LiteBus.WriteResponse.Resp,
+            s_axi_bvalid   => Axi4LiteBus.WriteResponse.Valid,
+            s_axi_bready   => Axi4LiteBus.WriteResponse.Ready,
             control_strobe => open,
             control_value  => control_value,
             status_strobe  => open,
