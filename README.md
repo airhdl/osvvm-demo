@@ -6,7 +6,7 @@ A VHDL project demonstrating how to use the [OSVVM library](https://osvvm.org/) 
 
 ## Architecture
 
-The toplevel component instantiates an airhdl register bank, `osvvm_regs`, which contains two registers:
+The testbench instantiates an airhdl register bank, `osvvm_regs`, which contains two registers:
 
 * a read/write `Control` register with a 16-bit `value` field   
 * a read-only `Status` register with a 16-bit `value` field
@@ -14,7 +14,7 @@ The toplevel component instantiates an airhdl register bank, `osvvm_regs`, which
 The `Control.value` output port of the register bank, which reflects the current value of the `Control.value` field, 
 is looped back to the `Status.value` input port, which represents the value to be read from the `Status.value` field.
 
-The `Axi4LiteManager` component, which is part of the OSVVM library, acts as a AXI4-Lite master. It is controlled by the Test Controller (`tb_osvvm_regs_testctrl`) through a standard OSVVM transaction record signal.
+The `Axi4LiteManager` component, which is part of the OSVVM library, acts as an AXI4-Lite master. It is remote-controlled by the Test Controller (`tb_osvvm_regs_testctrl`) through a standard OSVVM transaction record signal.
 
 Following the standard OSVVM pattern, test cases are implemented as alternative architectures of the Test Controller component. The design currently features the following test cases:
 
