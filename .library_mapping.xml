@@ -3,8 +3,18 @@
   <Mappings Location="Common Libraries/IEEE" Library="ieee"/>
   <Mappings Location="Common Libraries/IEEE Synopsys" Library="ieee"/>
   <Mappings Location="Common Libraries" Library="not mapped"/>
-  <Mappings Location="lib/OsvvmLibraries/DpRam" Library="not mapped"/>
-  <Mappings Location="lib/OsvvmLibraries/UART" Library="not mapped"/>
+  <Mappings Location="doc" Library="not mapped"/>
+  <Mappings Location="lib" Library="not mapped"/>
+  <Mappings Location="lib/OsvvmLibraries/osvvm/ScoreboardPkg_int_c.vhd" Library="not mapped"/>
+  <Mappings Location="lib/OsvvmLibraries/osvvm/ScoreboardPkg_slv_c.vhd" Library="not mapped"/>
+  <Mappings Location="lib/OsvvmLibraries/osvvm/VendorCovApiPkg.vhd" Library="not mapped"/>
+  <Mappings Location="lib/OsvvmLibraries/osvvm" Library="osvvm"/>
+  <Mappings Location="lib/OsvvmLibraries/AXI4/Axi4/src" Library="osvvm_axi4"/>
+  <Mappings Location="lib/OsvvmLibraries/AXI4/Axi4Lite/src" Library="osvvm_axi4"/>
+  <Mappings Location="lib/OsvvmLibraries/AXI4/common/src" Library="osvvm_axi4"/>
+  <Mappings Location="lib/OsvvmLibraries/Common/src" Library="osvvm_common"/>
+  <Mappings Location="src" Library="osvvm_demo"/>
+  <Mappings Location="tb" Library="osvvm_demo"/>
   <Mappings Location="Common Libraries/STD" Library="std"/>
   <Mappings Location="" Library="work"/>
 </com.sigasi.hdt.shared.librarymapping.model:LibraryMappings>
